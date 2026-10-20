@@ -265,6 +265,11 @@ $stmt->execute([
 
 
 } catch (PDOException $e) {
+    error_log('login.php error: ' . get_class($e) . ': ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Login failed. Please try again.']);
+} catch (\Throwable $e) {
+    error_log('login.php error: ' . get_class($e) . ': ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Server error during login.']);
 }
