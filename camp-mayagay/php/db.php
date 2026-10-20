@@ -19,6 +19,7 @@ $options = [
 try {
     $pdo = new PDO($dsn, $DB_USER, $DB_PASS, $options);
 } catch (PDOException $e) {
+    error_log('db.php connection error: ' . $e->getMessage());
     http_response_code(500);
     die(json_encode([
         'success' => false,
