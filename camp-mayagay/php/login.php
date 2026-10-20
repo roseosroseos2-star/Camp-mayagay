@@ -265,6 +265,7 @@ $stmt->execute([
 
 
 } catch (PDOException $e) {
+    error_log('login.php PDOException: ' . $e->getMessage());
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Login failed. Please try again.']);
 }
